@@ -1,0 +1,35 @@
+.display {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 30px;
+}
+
+.flash{color: red; font-size: 30px; text-align: center; margin: 10px}
+
+.operations {
+    font-size: 30px;
+    font-family: Arial;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
+table {font-size: 15px; font-family: Arial; width: 50%;
+    height: 100%; text-align: center;
+    margin: auto auto 15px;
+    border: 1px solid;
+    border-spacing: 0px;
+}
+
+tr, th, td {border: 1px solid; padding: 3px}
+
+.table {
+    margin-top: 20px;
+}
+
+.performance {
+    text-align: center;
+    margin: 10px;
+    font-family: Courier;
+    color: darkslateblue;
+}

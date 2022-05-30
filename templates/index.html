@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<link rel="stylesheet" type="text/css" href="../static/style.css">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Learning Platform</title>
+</head>
+<body>
+{% for message in get_flashed_messages() %}
+    <div class="flash">{{ message }}</div>
+{% endfor %}
+<div class="display">
+    <img src={{ path }} alt="vehicle" width=300px>
+</div>
+
+<div class="operations">
+    <form method="POST" enctype="multipart/form-data" class="formOperations">
+        Upload Image<br>
+        <input name="image" type="file" required><br>
+        <input class="formButton" type="submit" name="button" value="Upload"><br>
+    </form>
+
+    <form method="POST" enctype="multipart/form-data" class="formOperations">
+        <label for="prediction">Predict</label><br>
+        <select name="selected_image" required>
+            <option value="None" selected hidden>Select an Image</option>
+            {% for ID in imageNames %}
+                <option value={{ ID }}>{{ ID }}</option>
+            {% endfor %}
+        </select>
+        <input class="formButton" type="submit" name="button" value="View"><br>
+        <input class="formButton" type="submit" name="button" value="Predict"><br>
+    </form>
+
+    <form method="POST" enctype="multipart/form-data" class="formOperations">
+        <label for="confirm">Confirm Result</label><br>
+        <select name="selected_image" required>
+            <option value="None" selected hidden>Select an Image</option>
+            {% for ID in imageNameNotConfirmed %}
+                <option value={{ ID }}>{{ ID }}</option>
+            {% endfor %}
+        </select>
+        <input class="formButton" type="submit" name="button" value="View Result"><br>
+        <input class="formButton" type="submit" name="button" value="Correct">
+        <input class="formButton" type="submit" name="button" value="Incorrect">
+    </form>
+</div>
+
+<div class="table">
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Image</th>
+            <th>isVehicle</th>
+            <th>isConfirmed</th>
+            <th>Correct</th>
+        </tr>
+        {% for row in data %}
+            <tr>
+                <td>
+                    {{ row[0] }}
+                </td>
+                <td>
+                    <img src={{ row[1] }} width=64px>
+                </td>
+                <td>
+                    {{ row[2] }}
+                </td>
+                <td>
+                    {{ row[3] }}
+                </td>
+                <td>
+                    {{ row[4] }}
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+</div>
+
+<div class="performance">
+    <h2>
+        {{ accuracy }}
+    </h2>
+</div>
+</body>
+</html>
