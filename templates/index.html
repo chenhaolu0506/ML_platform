@@ -44,6 +44,11 @@
         <input class="formButton" type="submit" name="button" value="Correct">
         <input class="formButton" type="submit" name="button" value="Incorrect">
     </form>
+
+    <form method="POST" class="formOperations">
+        Train Model<br>
+        <input class="formButton" type="submit" name="button" value="Train"><br>
+    </form>
 </div>
 
 <div class="table">
@@ -51,8 +56,8 @@
         <tr>
             <th>ID</th>
             <th>Image</th>
-            <th>isVehicle</th>
-            <th>isConfirmed</th>
+            <th>Vehicle</th>
+            <th>Confirmed</th>
             <th>Correct</th>
         </tr>
         {% for row in data %}
