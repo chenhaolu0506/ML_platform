@@ -4,6 +4,7 @@ from glob import glob
 from tqdm import tqdm
 import numpy as np
 import cv2
+import query
 
 
 def build_model():
@@ -31,6 +32,7 @@ def save_model(model):
 
 
 def train_model():
+    query.set_training_status(True)
     model = build_model()
     images = []
     labels = []
@@ -50,6 +52,7 @@ def train_model():
     labels = np.array(labels)
     model.fit(images, labels, epochs=10, batch_size=64, validation_split=0.2)
     save_model(model)
+    query.set_training_status(False)
 
 
 def load_model(path):
