@@ -176,3 +176,20 @@ def get_accuracy():
             count[item['correct']] += 1
         accuracy = '{:.2f}'.format(count[1] / len(results) * 100)
         return f"{count[1]}/{len(results)}, accuracy: {accuracy}%"
+
+
+def get_training_status():
+    connection = connect_to_db()
+    with connection:
+        with connection.cursor() as cursor:
+            cursor.execute('SELECT is_training FROM training_status')
+            result = cursor.fetchone()
+    return result['is_training']
+
+
+def set_training_status(training):
+    connection = connect_to_db()
+    with connection:
+        with connection.cursor() as cursor:
+            cursor.execute('UPDATE training_status SET is_training=%s WHERE id=%s', (training, 1))
+            connection.commit()
