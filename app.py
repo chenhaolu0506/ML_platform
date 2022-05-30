@@ -4,6 +4,7 @@ import uuid
 import img_handle
 import query
 import CNN
+from threading import Thread
 
 app = Flask(__name__)
 app.secret_key = 'secret'
@@ -79,7 +80,13 @@ def index():  # put application's code here
                 return render_template('index.html', path=app.config['LOGO'], imageNames=img_ids,
                                        imageNameNotConfirmed=unconfirmed_ids, data=query.get_table_data(),
                                        accuracy=query.get_accuracy())
-    print(query.get_training_status())
+        if request.form['button'] == 'Train':
+            if query.get_training_status():
+                flash('Model already under training!')
+            else:
+                train_thread = Thread(target=CNN.train_model)
+                train_thread.start()
+                flash('Training started')
     return render_template('index.html', path=app.config['LOGO'], imageNames=img_ids,
                            imageNameNotConfirmed=unconfirmed_ids,
                            data=query.get_table_data(), accuracy=query.get_accuracy())
